@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'application'
+	id 'cpp'
+}
+
+mainClassName = 'de.gad.jni.SayHello'
+
+group = 'de.fiduciagad.tools.JNI'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+println "Building on OS: " + System.properties['os.name']
+println "Using JDK: " + System.properties['java.home']
+
+dependencies {
+	testImplementation 'junit:junit:4.12'
+}
+
+
+test {
+	systemProperty "java.library.path", file("${buildDir}/libs/hello/shared").absolutePath
+}
+
+
+model {
+	components {
+		sayHello(NativeLibrarySpec) {
+			sources {
+				cpp {
+					source {
+						srcDir 'src/main/jni'
+						include "**/*.cpp"
+					}
+					exportedHeaders {
+						srcDirs "${org.gradle.internal.jvm.Jvm.current().javaHome}/include", "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
+					}
+				}
+			}
+		}
+	}
+}
+
+test.dependsOn  'sayHelloSharedLibrary'

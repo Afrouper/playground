@@ -1,0 +1,11 @@
+plugins {
+	id 'java'
+}
+
+group = 'de.fiduciagad.tools.BCEL'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+dependencies {
+	implementation 'org.apache.bcel:bcel:5.2'
+}

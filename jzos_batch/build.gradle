@@ -1,0 +1,11 @@
+plugins {
+	id 'java'
+}
+
+group = 'de.fiduciagad.tools.JZos'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+dependencies {
+	implementation files('libs/jzos.jar')
+}
