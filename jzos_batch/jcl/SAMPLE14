@@ -21,7 +21,7 @@
 //*
 //*
 //JAVA EXEC PROC=EXJZOSVM,VERSION='14',
-// JAVACLS='com.dovetail.jzos.sample.ZFileCopy'
+// JAVACLS='ZFileCopy'
 //INPUT  DD DSN=SYS1.MACLIB(ACB),DISP=SHR
 //OUTPUT DD SYSOUT=*
 //STDENV DD *

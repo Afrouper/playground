@@ -1,4 +1,4 @@
-package de.gad.jni;
+package de.repmek.jni;
 
 
 import org.junit.Assert;

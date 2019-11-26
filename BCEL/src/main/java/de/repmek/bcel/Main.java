@@ -1,4 +1,4 @@
-package de.fiduciagad.bcel;
+package de.repmek.bcel;
 
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
@@ -17,7 +17,7 @@ public class Main {
 
 			System.out.println();
 
-			printClassVersion("C:\\TEMP\\client.jar", "de/gad/b21/Test.class");
+			printClassVersion("C:\\TEMP\\client.jar", "de/repmek/Test.class");
 		}
 		catch (Exception e) {
 			e.printStackTrace();

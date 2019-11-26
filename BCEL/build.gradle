@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 }
 
-group = 'de.fiduciagad.tools.BCEL'
+group = 'de.repmek.tools.BCEL'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 

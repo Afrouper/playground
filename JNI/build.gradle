@@ -6,7 +6,7 @@ plugins {
 
 mainClassName = 'de.gad.jni.SayHello'
 
-group = 'de.fiduciagad.tools.JNI'
+group = 'de.repmek.tools.JNI'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
