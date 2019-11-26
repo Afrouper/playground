@@ -7,5 +7,5 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 dependencies {
-	implementation files('libs/jzos.jar')
+	implementation 'com.adobe.xmp:xmpcore:5.1.3'
 }
