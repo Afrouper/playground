@@ -10,7 +10,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'tools'
+rootProject.name = 'Playground'
 
 include 'BCEL'
 include 'backtracking'
