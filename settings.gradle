@@ -1,15 +1,3 @@
-pluginManagement {
-	repositories {
-		maven {
-			url "https://nexus.in.fiduciagad.de/repository/maven2-internet-proxy/"
-	        credentials {
-	            username "xgtconrb"
-	            password "BCCeWDUWjgcQc6Kcmpa2kwBF252xpQxwKGgUnKmbD3v5FJmaCjB8NBq9VPn9kVxx"
-	        }
-		}
-    }
-}
-
 rootProject.name = 'Playground'
 
 include 'BCEL'
