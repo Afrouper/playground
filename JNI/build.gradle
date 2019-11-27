@@ -4,7 +4,7 @@ plugins {
 	id 'cpp'
 }
 
-mainClassName = 'de.gad.jni.SayHello'
+mainClassName = 'de.repmek.jni.SayHello'
 
 group = 'de.repmek.tools.JNI'
 version = '0.0.1-SNAPSHOT'
@@ -19,7 +19,7 @@ dependencies {
 
 
 test {
-	systemProperty "java.library.path", file("${buildDir}/libs/hello/shared").absolutePath
+	systemProperty "java.library.path", file("${buildDir}/libs/sayHello/shared").absolutePath
 }
 
 
