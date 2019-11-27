@@ -3,10 +3,6 @@ package de.repmek.bcel;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 
-/**
- * 
- * @author xgadkem
- */
 public class Main {
 
 	/**

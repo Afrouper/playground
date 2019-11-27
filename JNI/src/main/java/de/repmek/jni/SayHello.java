@@ -29,7 +29,7 @@ public class SayHello {
 			for (int i = 0; i < 50; ++i) {
 				hello.say("Roundtrip call " + i);
 			}
-			System.out.println(hello.sayHello("xgadkem"));
+			System.out.println(hello.sayHello("Lutz"));
 //			Thread.sleep(5000);
 		}
 		catch (Exception e) {
