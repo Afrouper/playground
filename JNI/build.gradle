@@ -14,7 +14,7 @@ println "Building on OS: " + System.properties['os.name']
 println "Using JDK: " + System.properties['java.home']
 
 dependencies {
-	testImplementation 'junit:junit:4.12'
+	testImplementation 'junit:junit:4.13.2'
 }
 
 
