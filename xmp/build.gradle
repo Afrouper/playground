@@ -4,7 +4,10 @@ plugins {
 
 group = 'de.repmek.xmp'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+}
 
 dependencies {
 	implementation 'com.adobe.xmp:xmpcore:6.1.11'

@@ -1,0 +1,15 @@
+plugins {
+	id 'java'
+}
+
+group = 'de.repmek.compression'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+}
