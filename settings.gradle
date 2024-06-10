@@ -1,8 +1,8 @@
-rootProject.name = 'Playground'
+rootProject.name = 'playground'
 
+include 'compression'
 include 'BCEL'
 include 'backtracking'
 include 'jzos_batch'
 include 'JNI'
 include 'xmp'
-include 'compression'
