@@ -2,12 +2,15 @@ package de.afrouper.compression;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NumberCompressionTest {
 
     private static final short[] NUMBERS_SHORT = new short[]{4711,815,88,1,9999,8000,7514,6941,1254,-500,0};
     private static final int[] NUMBERS_INTEGER = new int[]{4711,815,88,1,9999,8000,7514,6941,1254, 326547,-500,0};
+    private static int[] NUMBERS_INTEGER_POSITIVE = new int[]{4711,815,88,1,9999,8000,7514,6941,1254, 9876,0};
 
     private final NumberCompression numberCompression = new NumberCompression();
 
@@ -27,5 +30,15 @@ class NumberCompressionTest {
         System.out.println("Bytes: " + compressed.length());
         int[] uncompressed = numberCompression.uncompressInteger(compressed);
         assertArrayEquals(NUMBERS_INTEGER, uncompressed);
+    }
+
+    @Test
+    void testCompressionCycleBits() throws Exception {
+        String compressed = numberCompression.compressBits(NUMBERS_INTEGER_POSITIVE);
+        assertNotNull(compressed);
+        System.out.println("Bytes: " + compressed.length());
+        int[] ints = numberCompression.umcompressBits(compressed);
+        Arrays.sort(NUMBERS_INTEGER_POSITIVE);
+        assertArrayEquals(NUMBERS_INTEGER_POSITIVE, ints);
     }
 }

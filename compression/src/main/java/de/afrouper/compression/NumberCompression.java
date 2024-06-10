@@ -1,7 +1,13 @@
 package de.afrouper.compression;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.BitSet;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class NumberCompression {
 
@@ -31,6 +37,18 @@ public class NumberCompression {
         return encoder.encodeToString(bytes);
     }
 
+    public String compressBits(int[] numbers) throws IOException {
+        BitSet set = new BitSet();
+        for (int number : numbers) {
+            set.set(number);
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
+        gzipOutputStream.write(set.toByteArray());
+        gzipOutputStream.close();
+        return encoder.encodeToString(baos.toByteArray());
+    }
+
     public short[] uncompressShort(String data) {
         byte[] bytes = decoder.decode(data.getBytes(StandardCharsets.UTF_8));
         short[] numbers = new short[bytes.length / BYTES_SHORT];
@@ -51,5 +69,21 @@ public class NumberCompression {
                     (bytes[byteIndex+3] & 0xFF));
         }
         return numbers;
+    }
+
+    public int[] umcompressBits(String data) throws IOException {
+        byte[] bytes = decoder.decode(data.getBytes(StandardCharsets.UTF_8));
+        GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(bytes));
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[128];
+        int read = 0;
+        while ((read = gzipInputStream.read(buffer)) != -1) {
+            baos.write(buffer, 0, read);
+        }
+        baos.close();
+
+        BitSet bitSet = BitSet.valueOf(baos.toByteArray());
+        return bitSet.stream().toArray();
     }
 }
