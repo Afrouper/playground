@@ -18,7 +18,6 @@ class NumberCompressionTest {
     void testCompressionCycleShort() {
         String compressed = numberCompression.compressShort(NUMBERS_SHORT);
         assertNotNull(compressed);
-        System.out.println("Bytes: " + compressed.length());
         short[] uncompressed = numberCompression.uncompressShort(compressed);
         assertArrayEquals(NUMBERS_SHORT, uncompressed);
     }
@@ -27,18 +26,37 @@ class NumberCompressionTest {
     void testCompressionCycleInteger() {
         String compressed = numberCompression.compressInteger(NUMBERS_INTEGER);
         assertNotNull(compressed);
-        System.out.println("Bytes: " + compressed.length());
         int[] uncompressed = numberCompression.uncompressInteger(compressed);
         assertArrayEquals(NUMBERS_INTEGER, uncompressed);
     }
 
     @Test
-    void testCompressionCycleBits() throws Exception {
+    void testCompressionCycleBits() {
         String compressed = numberCompression.compressBits(NUMBERS_INTEGER_POSITIVE);
         assertNotNull(compressed);
-        System.out.println("Bytes: " + compressed.length());
         int[] ints = numberCompression.umcompressBits(compressed);
         Arrays.sort(NUMBERS_INTEGER_POSITIVE);
         assertArrayEquals(NUMBERS_INTEGER_POSITIVE, ints);
+    }
+
+    @Test
+    void testPerformance() {
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            testCompressionCycleInteger();
+        }
+        System.out.println("Integer Packing: " + (System.currentTimeMillis() - start) + " ms.");
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            testCompressionCycleShort();
+        }
+        System.out.println("Short Packing: " + (System.currentTimeMillis() - start) + " ms.");
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            testCompressionCycleBits();
+        }
+        System.out.println("Bits Packing: " + (System.currentTimeMillis() - start) + " ms.");
     }
 }

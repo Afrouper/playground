@@ -37,16 +37,12 @@ public class NumberCompression {
         return encoder.encodeToString(bytes);
     }
 
-    public String compressBits(int[] numbers) throws IOException {
+    public String compressBits(int[] numbers) {
         BitSet set = new BitSet();
         for (int number : numbers) {
             set.set(number);
         }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
-        gzipOutputStream.write(set.toByteArray());
-        gzipOutputStream.close();
-        return encoder.encodeToString(baos.toByteArray());
+        return encoder.encodeToString(compress(set.toByteArray()));
     }
 
     public short[] uncompressShort(String data) {
@@ -71,19 +67,41 @@ public class NumberCompression {
         return numbers;
     }
 
-    public int[] umcompressBits(String data) throws IOException {
+    public int[] umcompressBits(String data) {
         byte[] bytes = decoder.decode(data.getBytes(StandardCharsets.UTF_8));
-        GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(bytes));
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        byte[] buffer = new byte[128];
-        int read = 0;
-        while ((read = gzipInputStream.read(buffer)) != -1) {
-            baos.write(buffer, 0, read);
-        }
-        baos.close();
-
-        BitSet bitSet = BitSet.valueOf(baos.toByteArray());
+        bytes = uncompress(bytes);
+        BitSet bitSet = BitSet.valueOf(bytes);
         return bitSet.stream().toArray();
+    }
+
+    private byte[] compress(byte[] bytes) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            GZIPOutputStream gzipOutputStream = new GZIPOutputStream(baos);
+            gzipOutputStream.write(bytes);
+            gzipOutputStream.close();
+            return baos.toByteArray();
+        }
+        catch (IOException ex) {
+            throw new IllegalArgumentException("Could not compress bytes", ex);
+        }
+    }
+
+    private byte[] uncompress(byte[] bytes) {
+        try {
+            GZIPInputStream gzipInputStream = new GZIPInputStream(new ByteArrayInputStream(bytes));
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[128];
+            int read = 0;
+            while ((read = gzipInputStream.read(buffer)) != -1) {
+                baos.write(buffer, 0, read);
+            }
+            baos.close();
+            return baos.toByteArray();
+        }
+        catch (IOException ex) {
+            throw new IllegalArgumentException("Could not uncompress bytes", ex);
+        }
     }
 }
