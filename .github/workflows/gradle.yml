@@ -28,9 +28,12 @@ jobs:
       uses: gradle/actions/setup-gradle@v4
 
     - name: Set JAVA_HOME
-      run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))" >> $GITHUB_ENV
+      run: |
+        echo "Java Home: " $JAVA_HOME
+        echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))" >> $GITHUB_ENV
+        echo "Java Home: " $JAVA_HOME
 
     - name: Build with Gradle
       run: |
-        export INCLUDE_PATH="$JAVA_HOME/include:$JAVA_HOME/include/linux"
+        export CPLUS_INCLUDE_PATH="$JAVA_HOME/include:$JAVA_HOME/include/linux"
         ./gradlew build
