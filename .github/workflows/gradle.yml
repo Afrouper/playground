@@ -32,5 +32,5 @@ jobs:
 
     - name: Build with Gradle
       run: |
-        export C_INCLUDE_PATH="$JAVA_HOME/include:$JAVA_HOME/include/linux"
+        export INCLUDE_PATH="$JAVA_HOME/include:$JAVA_HOME/include/linux"
         ./gradlew build
