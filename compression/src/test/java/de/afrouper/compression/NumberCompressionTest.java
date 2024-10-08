@@ -3,6 +3,7 @@ package de.afrouper.compression;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,5 +59,25 @@ class NumberCompressionTest {
             testCompressionCycleBits();
         }
         System.out.println("Bits Packing: " + (System.currentTimeMillis() - start) + " ms.");
+    }
+
+    @Test
+    void test1000Numbers() throws Exception {
+        Random random = new Random();
+        int[] ints = new int[1000];
+        for (int i = 0; i < ints.length; i++) {
+            ints[i] = random.nextInt(10000) + 1;
+        }
+
+        System.out.println("Compress Integer Array with length " + ints.length);
+
+        String compressedBits = numberCompression.compressBits(ints);
+        String compressedInteger = numberCompression.compressInteger(ints);
+
+        assertNotNull(compressedBits);
+        assertNotNull(compressedInteger);
+
+        System.out.println("Compressed Bits length: " + compressedBits.length());
+        System.out.println("Compressed Integer length: " + compressedInteger.length());
     }
 }
