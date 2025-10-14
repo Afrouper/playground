@@ -10,5 +10,5 @@ java {
 }
 
 dependencies {
-	implementation 'org.apache.bcel:bcel:6.10.0'
+	implementation 'org.apache.bcel:bcel:6.11.0'
 }
