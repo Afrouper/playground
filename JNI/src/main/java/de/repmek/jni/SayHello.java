@@ -18,11 +18,6 @@ public class SayHello {
 		return sayHello(name);
 	}
 
-	@Override
-	protected void finalize() throws Throwable {
-		System.err.println("I'm finalized!!!");
-	}
-
 	public static void main(String[] args) {
 		try {
 			SayHello hello = new SayHello();
