@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-
+    name: Gradle java compile
     runs-on: ubuntu-latest
 
     steps:
