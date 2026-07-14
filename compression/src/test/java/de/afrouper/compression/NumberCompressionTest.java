@@ -11,7 +11,7 @@ class NumberCompressionTest {
 
     private static final short[] NUMBERS_SHORT = new short[]{4711,815,88,1,9999,8000,7514,6941,1254,-500,0};
     private static final int[] NUMBERS_INTEGER = new int[]{4711,815,88,1,9999,8000,7514,6941,1254, 326547,-500,0};
-    private static int[] NUMBERS_INTEGER_POSITIVE = new int[]{4711,815,88,1,9999,8000,7514,6941,1254, 9876,0};
+    private static final int[] NUMBERS_INTEGER_POSITIVE = new int[]{4711,815,88,1,9999,8000,7514,6941,1254, 9876,0};
 
     private final NumberCompression numberCompression = new NumberCompression();
 
@@ -41,6 +41,15 @@ class NumberCompressionTest {
     }
 
     @Test
+    void testCompress() {
+        String compressed = numberCompression.compress(NUMBERS_INTEGER_POSITIVE);
+        assertNotNull(compressed);
+        int[] ints = numberCompression.uncompress(compressed);
+        Arrays.sort(NUMBERS_INTEGER_POSITIVE);
+        assertArrayEquals(NUMBERS_INTEGER_POSITIVE, ints);
+    }
+
+    @Test
     void testPerformance() {
         long start = System.currentTimeMillis();
         for (int i = 0; i < 100000; i++) {
@@ -59,6 +68,12 @@ class NumberCompressionTest {
             testCompressionCycleBits();
         }
         System.out.println("Bits Packing: " + (System.currentTimeMillis() - start) + " ms.");
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            testCompress();
+        }
+        System.out.println("Compress: " + (System.currentTimeMillis() - start) + " ms.");
     }
 
     @Test
@@ -73,11 +88,14 @@ class NumberCompressionTest {
 
         String compressedBits = numberCompression.compressBits(ints);
         String compressedInteger = numberCompression.compressInteger(ints);
+        String compressed = numberCompression.compress(ints);
 
         assertNotNull(compressedBits);
         assertNotNull(compressedInteger);
+        assertNotNull(compressed);
 
         System.out.println("Compressed Bits length: " + compressedBits.length());
         System.out.println("Compressed Integer length: " + compressedInteger.length());
+        System.out.println("Compressed length: " + compressed.length());
     }
 }
